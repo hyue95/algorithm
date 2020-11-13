@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var letterCombinations = function(digits) {
+  if(digits === '') return []
+  const letterMap = ['abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
+  let res = []
+
+  findCombinations(digits, 0, '')
+  function findCombinations(digits, index, s){
+    if(index === digits.length){
+      res.push(s)
+      return
+    }
+    let c = parseInt(digits[index])
+    let letters = letterMap[c - 2]
+    for(let i = 0; i < letters.length; i ++){
+      findCombinations(digits, index + 1, s + letters[i])
+    }
+  }
+  return res
+};
+
+console.log(letterCombinations('23'))
+
+
+  </script>
+</body>
+</html>
+
