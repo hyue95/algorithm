@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+/* var combine = function(n, k) {
+  let res = []
+  if(n <= 0 || k <= 0 || k > n) return res
+  findCombination(n, k, 1, [])
+  function findCombination(n, k, start, c){
+    if(k === c.length){
+      res.push([...c])
+      return
+    }
+    for(let i = start; i <= n; i ++){
+      c.push(i)
+      findCombination(n, k, i + 1, c)
+      c.pop()
+    }
+  }
+  return res
+}; */
+
+//剪枝
+var combine = function(n, k) {
+  let res = []
+  if(n <= 0 || k <= 0 || k > n) return res
+  findCombination(n, k, 1, [])
+  function findCombination(n, k, start, c){
+    if(k === c.length){
+      res.push([...c])
+      return
+    }
+    // k - c.length 中c还没有push进去数据，所以要加1
+    for(let i = start; i <= n - (k - c.length) + 1; i ++){
+      c.push(i)
+      findCombination(n, k, i + 1, c)
+      c.pop()
+    }
+  }
+  return res
+};
+
+console.log(combine(4, 2))
+
+  </script>
+</body>
+</html>

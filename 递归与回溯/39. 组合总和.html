@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var combinationSum = function(candidates, target) {
+  let res = []
+  findCombination(candidates, target, [])
+  function findCombination(candidates, target, arr){
+    if(target === 0){
+      res.push([...arr])
+      return
+    }else if(target < 0){
+      return
+    }
+    for(let i = 0; i < candidates.length; i ++){
+      arr.push(candidates[i])
+      findCombination(candidates, target - candidates[i], arr)
+      arr.pop()
+    }
+  }
+  return res
+};
+
+console.log(combinationSum([2,3,6,7], 7))
+
+  </script>
+</body>
+</html>
