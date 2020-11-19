@@ -9,7 +9,26 @@
   <script>
 
 var combinationSum2 = function(candidates, target) {
-
+  let res = []
+  if(candidates.length === 0) return res
+  findCombination(candidates.sort((a, b) => a - b), target, [], 0, candidates.length)
+  function findCombination(candidates, target, path, start, len){
+    if(target < 0){
+      return
+    }
+    if(target === 0){
+      res.push([...path])
+      return 
+    }
+    for(let i = start; i < len; i ++){
+      if(target - candidates[i] < 0) break
+      if(i > start && candidates[i] === candidates[i - 1]) continue
+      path.push(candidates[i])
+      findCombination(candidates, target - candidates[i], path, i + 1, len)
+      path.pop()
+    }
+  }
+  return res
 };
 
 console.log(combinationSum2([10,1,2,7,6,1,5], 8))

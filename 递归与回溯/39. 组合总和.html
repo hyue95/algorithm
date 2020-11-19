@@ -8,26 +8,49 @@
 <body>
   <script>
 
-var combinationSum = function(candidates, target) {
+/* var combinationSum = function(candidates, target) {
   let res = []
-  findCombination(candidates, target, [])
-  function findCombination(candidates, target, arr){
+  findCombination(candidates, 0, candidates.length, target, [])
+  function findCombination(candidates, start, len, target, arr){
+    if(target < 0){
+      return
+    }
     if(target === 0){
       res.push([...arr])
       return
-    }else if(target < 0){
+    }
+    for(let i = start; i < len; i ++){
+      arr.push(candidates[i])
+      findCombination(candidates, i, len, target - candidates[i], arr)
+      arr.pop()
+    }
+  }
+  return res
+}; */
+
+//剪枝 （排序）
+var combinationSum = function(candidates, target) {
+  let res = []
+  
+  findCombination(candidates.sort((a, b) => a - b), 0, candidates.length, target, [])
+  function findCombination(candidates, start, len, target, arr){
+    if(target < 0){
       return
     }
-    for(let i = 0; i < candidates.length; i ++){
+    if(target === 0){
+      res.push([...arr])
+      return
+    }
+    for(let i = start; i < len; i ++){
+      if(target - candidates[i] < 0) break
       arr.push(candidates[i])
-      findCombination(candidates, target - candidates[i], arr)
+      findCombination(candidates, i, len, target - candidates[i], arr)
       arr.pop()
     }
   }
   return res
 };
-
-console.log(combinationSum([2,3,6,7], 7))
+console.log(combinationSum([2,3,5], 8))
 
   </script>
 </body>
