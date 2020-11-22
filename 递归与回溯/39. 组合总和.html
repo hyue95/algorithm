@@ -42,8 +42,10 @@ var combinationSum = function(candidates, target) {
       return
     }
     for(let i = start; i < len; i ++){
+      //剪枝
       if(target - candidates[i] < 0) break
       arr.push(candidates[i])
+      //因为可以重复选择自己
       findCombination(candidates, i, len, target - candidates[i], arr)
       arr.pop()
     }

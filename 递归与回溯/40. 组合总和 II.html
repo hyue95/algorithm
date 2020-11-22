@@ -22,6 +22,7 @@ var combinationSum2 = function(candidates, target) {
     }
     for(let i = start; i < len; i ++){
       if(target - candidates[i] < 0) break
+      //同一层级剪枝
       if(i > start && candidates[i] === candidates[i - 1]) continue
       path.push(candidates[i])
       findCombination(candidates, target - candidates[i], path, i + 1, len)

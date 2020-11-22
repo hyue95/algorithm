@@ -9,7 +9,19 @@
   <script>
 
 var subsets = function(nums) {
-
+  let res = []
+  findSubsets(nums, nums.length, 0, [])
+  function findSubsets(nums, len, start, sets){
+    if(sets.length <= len){
+      res.push([...sets])
+    }
+    for(let i = start; i < len; i ++){
+      sets.push(nums[i])
+      findSubsets(nums, len, i + 1, sets)
+      sets.pop()
+    }
+  }
+  return res
 };
 console.log(subsets([1,2,3]))
 

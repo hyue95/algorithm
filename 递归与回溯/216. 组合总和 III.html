@@ -9,7 +9,22 @@
   <script>
 
 var combinationSum3 = function(k, n) {
-
+  let res = []
+  findCombinationSum3(n, k, 1, [])
+  function findCombinationSum3(target, k, start, path){
+    if(target < 0 || k < 0) return
+    if(target === 0 && k === 0){
+      res.push([...path])
+      return
+    }
+    for(let i = start; i <= 9; i ++){
+      if(target - i < 0) break
+      path.push(i)
+      findCombinationSum3(target - i, k - 1, i + 1, path)
+      path.pop()
+    }
+  }
+  return res
 };
 
 console.log(combinationSum3(3, 9))

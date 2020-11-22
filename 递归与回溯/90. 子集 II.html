@@ -9,9 +9,23 @@
   <script>
 
 var subsetsWithDup = function(nums) {
-
+  let res = []
+  nums.sort((a, b) => a - b)
+  subsetsWithDup(nums, nums.length, 0, [])
+  function subsetsWithDup(nums, len, start, sets){
+    if(sets.length <= len){
+      res.push([...sets])
+    }
+    for(let i = start; i < len; i ++){
+      if(i > start && nums[i] === nums[i - 1]) continue
+      sets.push(nums[i])
+      subsetsWithDup(nums, len, i + 1, sets)
+      sets.pop()
+    }
+  }
+  return res
 };
-console.log(subsetsWithDup([1,2,2]))
+console.log(subsetsWithDup([1,1,2,2]))
 
   </script>
 </body>

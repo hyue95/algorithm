@@ -8,10 +8,60 @@
 <body>
   <script>
 
+/* 
+//超时
 var threeSum = function(nums) {
+  let res = []
+  nums.sort((a, b) => a - b)
+  if(nums[0] > 0 || nums[nums.length-1] < 0) return []
+  findThreeSum(nums, 0, 0, nums.length, [])
+  function findThreeSum(nums, target, start, len, arr){
+    if(arr.length === 3){
+      if(target === 0){
+        res.push([...arr])
+      }
+      return
+    }
+    for(let i = start; i < len; i ++){
+      if(target > 0) break
+      if(nums[i] !== 0 && i > start && nums[i] === nums[i - 1]) continue
+      arr.push(nums[i])
+      findThreeSum(nums, target + nums[i], i + 1, len, arr)
+      arr.pop()
+    }
+  }
+  return res
+}; */
 
+//双指针
+var threeSum = function(nums) {
+  nums.sort((a, b) => a - b)
+  if(nums[0] > 0 || nums[nums.length-1] < 0) return []
+  let result = []
+  for(let i = 0; i < nums.length-2; i ++){
+    if(i >= 1 && nums[i] === nums[i-1]) continue
+    if(nums[i] > 0) break
+    let target = 0 - nums[i]
+    let start = i + 1
+    let end = nums.length-1
+    while(start < end){
+      if(nums[start] + nums[end] > target){
+        end --
+      }else if(nums[start] + nums[end] < target){
+        start ++
+      }else{
+        result.push([nums[i], nums[start], nums[end]])
+        while(start < end && nums[start] === nums[start+1]) start ++
+        while(start < end && nums[end] === nums[end-1]) end --
+        start ++
+        end --
+      }
+    }
+  }
+  return result
 };
-
+// console.log(threeSum([-1, 0, 1, 2, -1, -4]))
+console.log(threeSum([0, 0 ,0]))
   </script>
 </body>
 </html>

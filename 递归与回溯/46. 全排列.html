@@ -8,32 +8,26 @@
 <body>
   <script>
 
-var permuteUnique = function(nums) {
+var permute = function(nums) {
   let res = []
-  let len = nums.length
-  if(len === 0) return res
-  let visited = Array(len).fill(false)
   nums.sort((a, b) => a - b)
-  findPermuteUnique(nums, len, [])
+  findPermuteUnique(nums, nums.length, [])
   function findPermuteUnique(nums, len, arr){
     if(arr.length === len){
       res.push([...arr])
       return
     }
     for(let i = 0; i < len; i ++){
-      if(visited[i]) continue
-      if(i > 0 && visited[i-1] && nums[i] === nums[i - 1]) break
+      if(arr.includes(nums[i])) continue
       arr.push(nums[i])
-      visited[i] = true
       findPermuteUnique(nums, len, arr)
       arr.pop()
-      visited[i] = false
     }
   }
   return res
 };
 
-console.log(permuteUnique([1,1,2]))
+console.log(permute([1, 2, 3]))
 
   </script>
 </body>
