@@ -9,8 +9,40 @@
   <script>
 
 var readBinaryWatch = function(num) {
-
+  let res = []
+  let map = [1, 2, 4, 8, 1, 2, 4, 8, 16, 32]
+  findReadBinaryWatch(num, {'hour': 0, 'minutes': 0}, 0)
+  function findReadBinaryWatch(num, time, start){
+    if(num === 0){
+      if(time.hour > 11 || time.minutes > 59) return
+      let tempHour = time.hour + ''
+      let tempMinutes = time.minutes + ''
+      if(tempMinutes.length === 1){
+        tempMinutes = '0' + tempMinutes
+      }
+      res.push(tempHour + ':' + tempMinutes)
+      return
+    }
+    for(let i = start; i < map.length; i ++){
+      if(time.hour > 11 ||time.minutes > 59) continue
+      if(i < 4){
+        time.hour += map[i]
+        findReadBinaryWatch(num - 1, time, i + 1)
+        time.hour -= map[i]
+      }else{
+        time.minutes += map[i]
+        findReadBinaryWatch(num - 1, time, i + 1)
+        time.minutes -= map[i]
+      }
+    }
+  }
+  return res
 };
+
+function prefixInteger(num, n){
+  return (Array(n).join(0) + num).slice(-n)
+}
+
 console.log(readBinaryWatch(1))
 
   </script>
