@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var rangeSumBST = function(root, low, high) {
+  if(root.length === 0) return 0
+  let sum = 0
+  dfs(root, low, high)
+  function dfs(root, low, high){
+    if(root === null) return
+    if(root.val >= low && root.val <= high){
+      sum += root.val
+    }
+    if(root.left){
+      dfs(root.left, low, high)
+    }
+    if(root.right){
+      dfs(root.right, low, high)
+    }
+  }
+  return sum
+};
+
+var rangeSumBST = function(root, low, high) {
+  if(root === null) return 0
+  if(root.val < low){
+    return rangeSumBST(root.right, low, high)
+  }
+  if(root.val > high){
+    return rangeSumBST(root.left, low, high)
+  }
+  return root.val + rangeSumBST(root.left, low, high) + rangeSumBST(root.right, low, high)
+};
+
+
+  </script>
+</body>
+</html>
