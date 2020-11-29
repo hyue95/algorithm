@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+/* 
+1.当前节点与左右子节点值相同时，各自+1，再将左右子节点路径和与全局最大路径比较
+2.注意，每层递归都需要返回左右子节点那个较长的路径，因为要返回给上一层
+ */
+var longestUnivaluePath = function(root) {
+  let res = 0
+  findLongestUnivaluePath(root)
+  function findLongestUnivaluePath(node){
+    if(!node) return 0
+    // 呼应return Math.max(leftPath, rightPath)
+    let left = findLongestUnivaluePath(node.left)
+    let right = findLongestUnivaluePath(node.right)
+    let leftPath = 0
+    let rightPath = 0
+    if(node.left && node.left.val === node.val){
+      leftPath = left + 1
+    }
+    if(node.right && node.right.val === node.val){
+      rightPath = right + 1
+    }
+    res = Math.max(res, leftPath + rightPath)
+    return Math.max(leftPath, rightPath)
+  }
+  return res
+};
+
+
+  </script>
+</body>
+</html>

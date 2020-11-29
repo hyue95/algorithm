@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var myPow = function(x, n) {
+  let res = absMyPow(x, Math.abs(n))
+  return n < 0 ? 1 / res : res
+
+  function absMyPow(x, n){
+    if(n === 0) return 1
+    if(n === 1) return x
+    let subRes = myPow(x, Math.floor(n / 2))
+    return n % 2 ? subRes * subRes * x : subRes * subRes
+  }
+};
+
+console.log(myPow(2.10000, 3))
+
+  </script>
+</body>
+</html>

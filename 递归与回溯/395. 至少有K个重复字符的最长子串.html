@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var longestSubstring = function(s, k) {
+  if(s.length < k) return 0
+  let map = {}
+  for(let item of s){
+    if(map[item]){
+      map[item] ++
+    }else{
+      map[item] = 1
+    }
+  }
+  for(let item in map){
+    if(map[item] < k){
+      let temp = s.split(item)
+      let max = 0
+      for(let c of temp){
+        //递归比较每个小于k字符所对应的下一层s.length
+        max = Math.max(longestSubstring(c, k), max)   
+      }
+      return max
+    }
+  }
+  //返回给上一层
+  return s.length
+};
+
+console.log(longestSubstring('bbaaacbd', 3))
+
+  </script>
+</body>
+</html>

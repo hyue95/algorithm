@@ -9,8 +9,29 @@
   <script>
 
 var findTilt = function(root) {
-  
+  let res = []
+  function getSum(node){
+    if(!node) return 0
+    let left = getSum(node.left)
+    let right = getSum(node.right)
+    res.push(Math.abs(left - right))
+    return node.val + left + right
+  }
+  getSum(root)
+  return res.reduce((pre, cur) => pre + cur, 0)
+};
 
+var findTilt = function(root) {
+  let res = 0
+  function getSum(node){
+    if(!node) return 0
+    let left = getSum(node.left)
+    let right = getSum(node.right)
+    res += Math.abs(left - right)
+    return node.val + left + right
+  }
+  getSum(root)
+  return res
 };
 
   </script>

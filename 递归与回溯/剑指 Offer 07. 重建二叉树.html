@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var buildTree = function(preorder, inorder) {
+  let map = new Map()
+  for(let i = 0; i < inorder.length; i ++){
+    map.set(inorder[i], i)
+  }
+  return recur(0, 0, preorder.length - 1)
+  function recur(pre_root, in_left, in_right){
+    if(in_left > in_right) return null
+    let node = new TreeNode(preorder[pre_root])
+    let i = map.get(preorder[pre_root])
+    node.left = recur(pre_root + 1, in_left, i - 1)
+    node.right = recur(pre_root + 1 + i - in_left, i + 1, in_right)
+    return node
+  }
+};
+
+
+  </script>
+</body>
+</html>

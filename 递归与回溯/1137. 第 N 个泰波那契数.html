@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var tribonacci = function(n) {
+  let map = [0, 1, 1]
+  function recur(n){
+    if(map[n] !== undefined) return map[n]
+    map[n] = recur(n-1) + recur(n-2) + recur(n-3)
+    return map[n]
+  }
+  return recur(n)
+};
+console.log(tribonacci(4))
+  </script>
+</body>
+</html>
