@@ -9,7 +9,15 @@
   <script>
 
 var canReach = function(arr, start) {
+  let len = arr.length
 
+  return findCanReach(arr, start, 0)
+  function findCanReach(arr, start, step){
+    if(start < 0 || start >= len) return false
+    if(step === len) return false
+    if(arr[start] == 0) return true
+    return findCanReach(arr, start + arr[start], step + 1) || findCanReach(arr, start - arr[start], step + 1)
+  }
 };
 
 console.log(canReach([4,2,3,0,3,1,2], 5))

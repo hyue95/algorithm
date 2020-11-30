@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var divingBoard = function(shorter, longer, k) {
+  let res = []
+  if(k === 0) return res
+  if(shorter === longer) return [shorter * k]
+  findDivingBoard(shorter, longer, k, 0)
+  function findDivingBoard(shorter, longer, k, i){
+    if(i > k) return res
+    res.push(shorter * (k - i) + longer * i)
+    return findDivingBoard(shorter, longer, k, i + 1)
+  }
+  return res
+};
+
+console.log(divingBoard(1, 2, 3))
+
+  </script>
+</body>
+</html>
